@@ -1,0 +1,27 @@
+<% include ../partials/header.ejs %>
+
+<div class="ui clearing segment">
+    <div class="ui huge block header">Welcome to the Forums!</div>
+    <div class="ui clearing segment">
+        
+        <% if( mainCategories.length > 0 ) { %>
+        
+            <%- include("./partials/maincategory.ejs",{categoryNr:0,showAdminButtons: true}) %>
+
+            <% if( mainCategories.length > 1 ) { 
+                var mC;
+                for( mC = 1; mC < mainCategories.length - 1; mC++ ) { %>
+
+                    <%- include("./partials/maincategory.ejs",{categoryNr:mC,showAdminButtons: true}) %>
+
+                <% } %>
+                <%- include("./partials/maincategory.ejs",{categoryNr:mC,showAdminButtons: true}) %>
+
+            <% } %>
+        <% } %>
+        <p></p>
+        <a class="ui primary button" href="/categories/new">Add a new main category</a>       
+    </div>
+</div>
+
+<% include ../partials/footer.ejs %>

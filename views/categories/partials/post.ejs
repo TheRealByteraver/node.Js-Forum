@@ -1,0 +1,37 @@
+<%
+var forumColors = [
+    "red",
+    "orange",
+    "yellow",
+    "olive",
+    "green",
+    "teal",
+    "blue",
+    "violet",
+    "purple",
+    "pink",
+    "brown",
+    "grey",
+    "black"
+];
+var colorStr = forumColors[postNr % forumColors.length];
+%>
+
+<h3 class="mainCategory">
+    <a class="fluid ui blue huge inverted button" 
+        href="/categories/<%= foundMainCategory._id %>/<%= foundSubCategory._id %>/<%= foundSubCategory.posts[postNr]._id %>">
+        <%= foundSubCategory.posts[postNr].title %>
+    </a>
+    <% if( showAdminButtons ) { %>
+    
+        <form class="mainCategoryBtns" 
+            action="/categories/<%= foundMainCategory._id %>/<%= foundsubCategory._id %>/edit" method="GET">
+            <button class="ui medium orange button">Edit</button>
+        </form>
+        <form class="mainCategoryBtns" 
+            action="/categories/<%= foundMainCategory._id %>/<%= foundsubCategory._id %>?_method=DELETE" method="POST">
+            <button class="ui medium red button">Delete</button>
+        </form>
+    <% } %>
+    
+</h3>

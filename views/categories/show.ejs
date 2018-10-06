@@ -1,0 +1,24 @@
+<% include ../partials/header.ejs %>
+
+<div class="ui clearing segment">
+    <div class="ui huge block header">Welcome to the "<%= foundMainCategory.name %>" Forum!</div>
+    <div class="ui clearing segment">
+        <% if( foundMainCategory.subCategories.length > 0 ) { %>
+            <%- include("./partials/subcategory.ejs",{subCategoryNr:0,showAdminButtons: true}) %>
+            <% if( foundMainCategory.subCategories.length > 1 ) { 
+                var sC;
+                for( sC = 1; sC < foundMainCategory.subCategories.length - 1; sC++ ) { %>
+                    <%- include("./partials/subcategory.ejs",{subCategoryNr:sC,showAdminButtons: true}) %>
+                <% } %>
+                <%- include("./partials/subcategory.ejs",{subCategoryNr:sC,showAdminButtons: true}) %>
+            <% } %>
+        <% } %>
+        <p></p>
+        <a class="ui primary button" href="/categories/<%= foundMainCategory._id %>/new">Add a new subcategory</a>       
+    </div>
+</div>
+
+<p></p>
+<a class="ui primary button" href="/categories">Back to the main page</a>
+
+<% include ../partials/footer.ejs %>

@@ -1,0 +1,15 @@
+<% include ../partials/header.ejs %>
+
+<h1>Welcome to the main category "<%= foundMainCategory.name %>" edit page:</h1>
+
+<div>
+    <form action="/categories/<%= foundMainCategory._id %>?_method=PUT" method="POST">
+        <input type="text" name="name" value="<%= foundMainCategory.name %>" required>
+        <input type="text" name="color" value="<%= foundMainCategory.color %>" required>
+        <button>Submit</button>
+    </form>
+</div>
+
+<a href="/categories">Go Back</a>
+
+<% include ../partials/footer.ejs %>

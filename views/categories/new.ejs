@@ -1,0 +1,12 @@
+<% include ../partials/header.ejs %>
+
+<h1>Welcome to the add main category page of the Forum.</h1>
+
+<form action="/categories" method="POST">
+    <input type="text" name="name" placeholder="Main category name" required>
+    <input type="text" name="color" value="#2020f0" required>
+    <button>Add forum</button>
+</form>
+<a href="/categories">Go Back</a>
+
+<% include ../partials/footer.ejs %>

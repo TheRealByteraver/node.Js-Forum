@@ -1,0 +1,47 @@
+<%
+var forumColors = [
+    "red",
+    "orange",
+    "yellow",
+    "olive",
+    "green",
+    "teal",
+    "blue",
+    "violet",
+    "purple",
+    "pink",
+    "brown",
+    "grey",
+    "black"
+];
+var colorStr = forumColors[subCategoryNr % forumColors.length];
+%>
+
+<h3 class="mainCategory">
+    <a  class="fluid ui <%= colorStr/* foundMainCategory.subCategories[subCategoryNr].color */ %> huge inverted button" 
+        href="/categories/<%= foundMainCategory._id %>/<%= foundMainCategory.subCategories[subCategoryNr]._id %>">
+        <%
+/*            var subCategoryTitle = "";
+            SubCategory.findById(foundMainCategory.subCategories[subCategoryNr]._id,function(err,foundSubCategory){
+               if(err) {
+                   console.log(err);
+               } else {
+                   subCategoryTitle = foundSubCategory.name;
+               }
+            });*/
+        %>
+        <%= foundMainCategory.subCategories[subCategoryNr].name %> 
+       
+    </a>
+    <% if( showAdminButtons ) { %>
+        <form class="mainCategoryBtns" 
+            action="/categories/<%= foundMainCategory._id %>/<%= foundMainCategory.subCategories[subCategoryNr]._id %>/edit" method="GET">
+            <button class="ui medium orange button">Edit</button>
+        </form>
+        <form class="mainCategoryBtns" 
+            action="/categories/<%= foundMainCategory._id %>/<%= foundMainCategory.subCategories[subCategoryNr]._id %>?_method=DELETE" method="POST">
+            <button class="ui medium red button">Delete</button>
+        </form>
+    <% } %>
+    
+</h3>

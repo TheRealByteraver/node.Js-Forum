@@ -1,0 +1,22 @@
+<% include ../partials/header.ejs %>
+
+<!--to finish-->
+
+<div class="ui clearing segment">
+    <div class="ui huge block header">Welcome to the "<%= foundSubCategory.name %>" Forum edit page.</div>
+    <div class="ui clearing segment">
+
+
+        <form action="/categories/<%= foundMainCategory._id %>/<%= foundSubCategory._id %>?_method=PUT" method="POST">
+            <input type="text" name="name" value="<%= foundSubCategory.name %>" required>
+            <button>Submit</button>
+        </form>
+
+    </div>
+</div>
+
+<p></p>
+        
+<a class="ui primary button" href="/categories/<%= foundMainCategory._id %>">Back to the <%= foundMainCategory.name %> forum</a>
+
+<% include ../partials/footer.ejs %>

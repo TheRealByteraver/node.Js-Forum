@@ -1,0 +1,33 @@
+<%
+var forumColors = [
+    "red",
+    "orange",
+    "yellow",
+    "olive",
+    "green",
+    "teal",
+    "blue",
+    "violet",
+    "purple",
+    "pink",
+    "brown",
+    "grey",
+    "black"
+];
+var colorStr = forumColors[categoryNr % forumColors.length];
+%>
+
+<h3 class="mainCategory">
+    <a  class="fluid ui <%= colorStr/* mainCategories[categoryNr].color */ %> huge inverted button" 
+        href="/categories/<%= mainCategories[categoryNr]._id %>"><%= mainCategories[categoryNr].name %>
+    </a>
+    <% if( showAdminButtons ) { %>
+        <form class="mainCategoryBtns" action="/categories/<%= mainCategories[categoryNr]._id %>/edit" method="GET">
+            <button class="ui medium orange button">Edit</button>
+        </form>
+        <form class="mainCategoryBtns" action="/categories/<%= mainCategories[categoryNr]._id %>?_method=DELETE" method="POST">
+            <button class="ui medium red button">Delete</button>
+        </form>
+    <% } %>
+    
+</h3>

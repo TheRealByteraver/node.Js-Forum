@@ -1,0 +1,12 @@
+<% include ../partials/header.ejs %>
+
+<h1>Welcome to the add subcategory page of the Forum.</h1>
+
+<form action="/categories/<%= foundMainCategory._id %>" method="POST">
+    <input type="text" name="name" placeholder="Subcategory name" required>
+    <!--<input type="text" name="color" value="#2020f0" required>-->
+    <button>Add subcategory</button>
+</form>
+<a href="/categories/<%= foundMainCategory._id %>">Go Back</a>
+
+<% include ../partials/footer.ejs %>
