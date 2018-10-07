@@ -178,14 +178,18 @@ app.delete("/categories/:id",function(req,res){
           console.log(err);
       } else {
         foundMainCategory.subCategories.forEach(function(subCategory) {
-            console.log( typeof(subCategory._id) );
-            console.log( typeof( req.params.id ) );
+            // console.log( typeof( subCategory._id) ); // object
+            // console.log( typeof( req.params.id ) ); // string
             SubCategory.findByIdAndRemove( subCategory._id,function(err) {
-                console.log("subcategory delete error: " + err);
+                if(err) {
+                    console.log("subcategory delete error: " + err);
+                }
             });    
         }); 
         MainCategory.findByIdAndRemove(req.params.id,function(err) {
-            console.log("main category delete error: " + err);
+            if(err) {
+                console.log("main category delete error: " + err);
+            }
         });
       }
    });
@@ -312,9 +316,37 @@ app.put("/categories/:id/:sub_id",function(req,res){
    });
 });
 
+// sub category DELETE ROUTE: delete the main category
+app.delete("/categories/:id/:sub_id",function(req,res){
+    MainCategory.findById(req.params.id,function(err,foundMainCategory) {
+        if(err) {
+          console.log(err);
+        } else {
+            var i;
+            //console.log("orig id = " + req.params.sub_id);
+            for( i = 0; i < foundMainCategory.subCategories.length; i++ ) {
+              //console.log("subcat nr " + i + " id = " + foundMainCategory.subCategories[i]._id);
+                if( foundMainCategory.subCategories[i]._id == req.params.sub_id ) {
+                    var removed = foundMainCategory.subCategories.splice( i,1 );
+                    console.log("removed subcategory from main list: " + removed);
+                    //console.log("subcat name = " + foundMainCategory.subCategories[i].name);
+                    //console.log("i = " + i);
+                    break;
+                }
+            }
+            foundMainCategory.save();
+        }
+    }); 
+    SubCategory.findByIdAndRemove(req.params.sub_id,function( err ) {
+        if(err) {
+            console.log("sub category delete error: " + err);
+        }
+    });
+    res.redirect("/categories/" + req.params.id);
+});
+
 app.listen(process.env.PORT,process.env.IP,function(){
     console.log('forum server has started');
 });
 
-// subcategory SHOW ROUTE:
 
