@@ -173,10 +173,20 @@ app.put("/categories/:id",function(req,res){
 
 // main category DELETE ROUTE: delete the main category
 app.delete("/categories/:id",function(req,res){
-        MainCategory.findByIdAndRemove(req.params.id,function(err,foundMainCategory){
+    MainCategory.findById(req.params.id,function(err,foundMainCategory) {
       if(err) {
           console.log(err);
       } else {
+        foundMainCategory.subCategories.forEach(function(subCategory) {
+            console.log( typeof(subCategory._id) );
+            console.log( typeof( req.params.id ) );
+            SubCategory.findByIdAndRemove( subCategory._id,function(err) {
+                console.log("subcategory delete error: " + err);
+            });    
+        }); 
+        MainCategory.findByIdAndRemove(req.params.id,function(err) {
+            console.log("main category delete error: " + err);
+        });
       }
    });
    res.redirect("/categories");
@@ -277,7 +287,7 @@ app.put("/categories/:id/:sub_id",function(req,res){
           var updatedSubCategory = {
               name:req.body.name
           }
-          console.log(req.body.name);
+          //console.log(req.body.name);
           SubCategory.findByIdAndUpdate(req.params.sub_id,updatedSubCategory,function(err,foundSubCategory){
               if(err) {
                   console.log(err);
