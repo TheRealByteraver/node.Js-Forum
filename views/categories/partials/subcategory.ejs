@@ -20,16 +20,6 @@ var colorStr = forumColors[subCategoryNr % forumColors.length];
 <h3 class="mainCategory">
     <a  class="fluid ui <%= colorStr/* foundMainCategory.subCategories[subCategoryNr].color */ %> huge inverted button" 
         href="/categories/<%= foundMainCategory._id %>/<%= foundMainCategory.subCategories[subCategoryNr]._id %>">
-        <%
-/*            var subCategoryTitle = "";
-            SubCategory.findById(foundMainCategory.subCategories[subCategoryNr]._id,function(err,foundSubCategory){
-               if(err) {
-                   console.log(err);
-               } else {
-                   subCategoryTitle = foundSubCategory.name;
-               }
-            });*/
-        %>
         <%= foundMainCategory.subCategories[subCategoryNr].name %> 
        
     </a>

@@ -1,0 +1,15 @@
+<% include ../partials/header.ejs %>
+
+<h1>Welcome to the add post page of the Forum "<%= foundSubCategory.name %>".</h1>
+
+<form action="/categories/<%= foundMainCategory._id %>/<%= foundSubCategory._id %>" method="POST">
+    <input type="text" name="title" placeholder="Post title" required>
+    <br>
+    <!--<input type="text" name="message" placeholder="Post message" required>-->
+    <textarea name="message" rows="4" cols="50" placeholder="Post message" required></textarea>
+    <br>
+    <button>Post message</button>
+</form>
+<a href="/categories/<%= foundMainCategory._id %>/<%= foundSubCategory._id %>">Go Back</a>
+
+<% include ../partials/footer.ejs %>

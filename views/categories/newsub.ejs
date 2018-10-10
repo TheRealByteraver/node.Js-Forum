@@ -1,6 +1,6 @@
 <% include ../partials/header.ejs %>
 
-<h1>Welcome to the add subcategory page of the Forum.</h1>
+<h1>Welcome to the add subcategory page of the "<%= foundMainCategory.name %>" forum.</h1>
 
 <form action="/categories/<%= foundMainCategory._id %>" method="POST">
     <input type="text" name="name" placeholder="Subcategory name" required>

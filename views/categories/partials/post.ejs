@@ -25,11 +25,11 @@ var colorStr = forumColors[postNr % forumColors.length];
     <% if( showAdminButtons ) { %>
     
         <form class="mainCategoryBtns" 
-            action="/categories/<%= foundMainCategory._id %>/<%= foundsubCategory._id %>/edit" method="GET">
+            action="/categories/<%= foundMainCategory._id %>/<%= foundSubCategory._id %>/<%= foundSubCategory.posts[postNr]._id %>/edit" method="GET">
             <button class="ui medium orange button">Edit</button>
         </form>
         <form class="mainCategoryBtns" 
-            action="/categories/<%= foundMainCategory._id %>/<%= foundsubCategory._id %>?_method=DELETE" method="POST">
+            action="/categories/<%= foundMainCategory._id %>/<%= foundSubCategory._id %>/<%= foundSubCategory.posts[postNr]._id %>?_method=DELETE" method="POST">
             <button class="ui medium red button">Delete</button>
         </form>
     <% } %>
