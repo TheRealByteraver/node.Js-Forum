@@ -180,13 +180,15 @@ app.delete("/categories/:id",function(req,res){
           console.log(err);
       } else {
         foundMainCategory.subCategories.forEach(function(subCategory) {
-            // console.log( typeof( subCategory._id) ); // object
-            // console.log( typeof( req.params.id ) ); // string
-            
-            // *********************
-            // DELETE ALL POSTS HERE
-            // *********************
-            
+            if(subCategory.posts) {
+                subCategory.posts.forEach(function(post){
+                    Post.findByIdAndRemove( post._id,function(err){
+                        if(err) {
+                            console.log("post delete error: " + err);
+                        }                    
+                    });
+                });
+            }
             SubCategory.findByIdAndRemove( subCategory._id,function(err) {
                 if(err) {
                     console.log("subcategory delete error: " + err);
@@ -333,6 +335,21 @@ app.delete("/categories/:id/:sub_id",function(req,res){
                 }
             }
             foundMainCategory.save();
+            SubCategory.findById(req.params.sub_id,function( err,foundSubCategory ) {
+                if(err) {
+                    console.log("sub category delete error: " + err);
+                } else {
+                    if(foundSubCategory.posts) {
+                        foundSubCategory.posts.forEach(function(post){
+                            Post.findByIdAndRemove( post._id,function(err){
+                                if(err) {
+                                    console.log("post delete error: " + err);
+                                }                    
+                            });
+                        });
+                    }
+                }
+            });
             SubCategory.findByIdAndRemove(req.params.sub_id,function( err ) {
                 if(err) {
                     console.log("sub category delete error: " + err);
