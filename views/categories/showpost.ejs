@@ -1,0 +1,18 @@
+<% include ../partials/header.ejs %>
+
+<div class="ui clearing segment">
+    <div class="ui huge block header"><%= foundPost.title %></div>
+    <div class="ui clearing segment">
+            
+        <p><%- foundPost.message  %></p>
+        
+        <a class="ui primary button" href="/categories/<%= foundMainCategory._id %>/<%= foundSubCategory._id %>/<%= foundPost._id %>">post reply</a> 
+
+    </div>
+</div>
+
+<p></p>
+        
+<a class="ui primary button" href="/categories/<%= foundMainCategory._id %>/<%= foundSubCategory._id %>">Back to the <%= foundSubCategory.name %> forum</a>
+
+<% include ../partials/footer.ejs %>
